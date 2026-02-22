@@ -14,7 +14,8 @@ print(os.listdir())
 # print(os.listdir())
 
 class Cohort:
-    def __init__ (self, cohort_num, cohort_month, cohort_day1, cohort_day2, cohort_year):
+    def __init__ (self, cohort_id, cohort_num, cohort_month, cohort_day1, cohort_day2, cohort_year):
+        self.cohort_id = cohort_id
         self.cohort_num = cohort_num
         self.cohort_month = cohort_month
         self.cohort_day1 = cohort_day1
@@ -27,7 +28,8 @@ cohort_list = []
 
 
 for i in range(number):
-    value = input(f"Enter item {i + 1} value: ")
-    my_dict[i] = "Cohort #" + value
 
-print(my_dict)
+    cohort_num = input(f"Enter item {i + 1} value: ")
+    
+
+print(cohort_list)
