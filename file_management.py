@@ -1,4 +1,5 @@
-import os, shutil
+import os, shutil, cohort
+from cohort import Cohort
 
 print(os.getcwd())
 os.chdir(os.getcwd() + '/class documents')
@@ -12,17 +13,6 @@ print(os.listdir())
 
 # shutil.copyfile('agreement form.docx', '../(#20 SPANISH) Mon Wed March 2026 Workshop 360 Valencia/Cohort #20 Agreement Form.docx')
 # print(os.listdir())
-
-class Cohort:
-    def __init__ (self, cohort_id, cohort_num, cohort_month, cohort_year, cohort_days, cohort_start, cohort_end):
-        self.cohort_id = cohort_id
-        self.cohort_num = cohort_num
-        self.cohort_month = cohort_month
-        self.cohort_year = cohort_year
-        self.cohort_days = cohort_days
-        self.cohort_start = cohort_start
-        self.cohort_end = cohort_end
-    
 
 
 number = int(input("Enter number: "))
