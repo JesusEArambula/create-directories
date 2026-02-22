@@ -5,6 +5,11 @@ from operator import methodcaller
 # List of subdifectories to create for each cohort folder
 subdirectories = ["Class Documents", "Files", "Flyer", "Report", "Schedule", "Roster"]
 
+# Dictionary to choose day options
+# 1) Monday/Wednesday
+# 2) Tuesday/Thursday
+day_options = {1: "Mon Wed", 2: "Tue Thu"}
+
 # List to store cohorts' information
 cohort_list = []
 
@@ -18,17 +23,17 @@ count = prompt.enter_cohort_count()
 for i in range(count):
     message.info_banner(i)
     num = prompt.enter_cohort_number()
-    days = prompt.enter_cohort_days()
+    option = prompt.enter_cohort_days()
     start = prompt.enter_cohort_start_date()
     end = prompt.enter_cohort_end_date()
     # Root of cohort folder
     # Change for every cohort number
-    directory = names.cohort_directory_name(num, month, year)
+    directory = names.cohort_directory_name(num, month, year, day_options[option])
     # Create the parent cohort folder if it doesn't already exist
     directories.create_directory(directory)
     # Create enrollment, agreement, syllabus, and roster files
     # based on user cohort number, month, and year input
-    files = names.create_file_names(num, month, year)
+    files = names.create_file_names(num, month, year, day_options[option])
     # Debuggin for loop
     # Display all files created for cohort
     for file in files:
@@ -36,7 +41,7 @@ for i in range(count):
     # Create paths to sub directories
     directories.create_path(directory, subdirectories)
     
-    cohort = Cohort(i, num, month, year, days, start, end, directory, files)
+    cohort = Cohort(i, num, month, year, option, start, end, directory, files)
     cohort_list.append(cohort)
 
 results = list(map(methodcaller('get_directory'), cohort_list))

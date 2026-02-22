@@ -14,14 +14,14 @@ def enter_cohort_count():
 
 # Take user input for cohort number
 def enter_cohort_number():
-    return str(input("Enter first Cohort number: "))
+    return str(input("Enter Cohort number: "))
 
 # Take user input for first cohort days
 # 1) Mondays/Wednesdays
 # 2) Tuesdays/Thursdays
 def enter_cohort_days():
     message.day_options()
-    return str(input("Enter cohort days: "))
+    return int(input("Enter cohort days: "))
 
 # Take user input for cohort start date
 def enter_cohort_start_date():
