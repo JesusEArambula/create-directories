@@ -13,8 +13,18 @@ print(os.listdir())
 # shutil.copyfile('agreement form.docx', '../(#20 SPANISH) Mon Wed March 2026 Workshop 360 Valencia/Cohort #20 Agreement Form.docx')
 # print(os.listdir())
 
+class Cohort:
+    def __init__ (self, cohort_num, cohort_month, cohort_day1, cohort_day2, cohort_year):
+        self.cohort_num = cohort_num
+        self.cohort_month = cohort_month
+        self.cohort_day1 = cohort_day1
+        self.cohort_day2 = cohort_day2
+        self.cohort_year = cohort_year
+
 number = int(input("Enter number: "))
-my_dict = {}
+
+cohort_list = []
+
 
 for i in range(number):
     value = input(f"Enter item {i + 1} value: ")
