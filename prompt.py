@@ -2,11 +2,11 @@ import message
 
 # Take user input for cohort month
 def enter_cohort_month():
-    return str(input("Enter cohort month: "))
+    return str(input("Enter cohort month: ")).title()
 
 # Tak user inpur for cohort year
 def enter_cohort_year():
-    return int(input("Enter cohort year: "))
+    return str(input("Enter cohort year: "))
 
 # Take user input for count of cohorts to create
 def enter_cohort_count():
@@ -14,19 +14,20 @@ def enter_cohort_count():
 
 # Take user input for cohort number
 def enter_cohort_number():
-    return int(input("Enter first Cohort number: "))
+    return str(input("Enter first Cohort number: "))
 
 # Take user input for first cohort days
 # 1) Mondays/Wednesdays
 # 2) Tuesdays/Thursdays
-def cohort_days():
-    print(message.day_options())
-    return int(input("Enter cohort days: "))
+def enter_cohort_days():
+    message.day_options()
+    return str(input("Enter cohort days: "))
 
 # Take user input for cohort start date
-def cohort_start_date():
-    return int(input("Enter cohort start date: "))
+def enter_cohort_start_date():
+    return str(input("Enter cohort start date: "))
 
-def cohort_end_date():
-    return int(input("Enter cohort end date: "))
+# Take user input for cohort end date
+def enter_cohort_end_date():
+    return str(input("Enter cohort end date: "))
 
