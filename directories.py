@@ -6,7 +6,7 @@ def create_directory(directory):
     print(f"Folder << {directory} >> created successfully.")
 
 # Function to create paths to subfolder
-def create_path(directory, subdirectories):
+def create_path(directory, subdirectories, files_subdirectories):
     message.break_line()
     print(f"Creating subdirectories for {directory} ...")
     for subdirectory in subdirectories:
@@ -17,8 +17,14 @@ def create_path(directory, subdirectories):
         #      |         |       |       |          |         |
         #  Documents   Files   Flyer   Report   Schedule   Roster
         
-        path_to_create = os.path.join(directory, subdirectory)
-        os.makedirs(path_to_create, exist_ok=True)
+        os.makedirs(os.path.join(directory, subdirectory), exist_ok=True)
+
+        # Chesk if the current subdirectory we're creating is the Files subdirectory
+        # To create the Files subdirectory its own subdirectories
+        if subdirectory == "Files":
+            for files_subdirectory in files_subdirectories:
+                os.makedirs(os.path.join(directory + "/" + subdirectory, files_subdirectory), exist_ok=True)
+                print(f"Folder << {subdirectory}/{files_subdirectory} >> inside Files directory created successfully.")
         print(f"Folder << {directory}/{subdirectory} >> created successfully.")
 
 

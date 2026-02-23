@@ -4,7 +4,7 @@ def split_days(option):
 
 # Cohort directory name
 def cohort_directory_name(number, month, year, days):
-    return f"(#{number} SPANISH) {days} {month} {year} Workshop 360 Valencia"
+    return f"(#{number} SPANISH) {days.split()[0]}, {days.split()[1]} {month} {year} Workshop 360 Valencia"
 
 # Enrollment form name
 def enrollment(number, month, year, days):
