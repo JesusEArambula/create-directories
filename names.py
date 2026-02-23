@@ -2,6 +2,10 @@
 def split_days(option):
     return f"{option.split()[0]}/{option.split()[1]}"
 
+# Cohort number certificate directory name
+def certificates(num):
+    return f"Cohort #{num} Certificates"
+
 # Cohort directory name
 def cohort_directory_name(number, month, year, days):
     return f"(#{number} SPANISH) {days.split()[0]}, {days.split()[1]} {month} {year} Workshop 360 Valencia"

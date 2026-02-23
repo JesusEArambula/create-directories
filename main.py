@@ -28,8 +28,8 @@ for i in range(count):
     option = prompt.enter_cohort_days()
     start = prompt.enter_cohort_start_date()
     end = prompt.enter_cohort_end_date()
-    # Add Cohort certificates files subdirectory
-    files_subdirectories.append(f"Cohort #{num} Certificates")
+    # Add cohort certificates name for Files' subdirectory
+    files_subdirectories.append(names.certificates(num))
     # Root of cohort folder
     # Change for every cohort number
     directory = names.cohort_directory_name(num, month, year, day_options[option])
