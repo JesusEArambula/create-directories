@@ -52,6 +52,8 @@ for i in range(count):
         print("File Created: " + file)
     # Create paths to sub directories
     directories.create_path(directory, subdirectories, files_subdirectories)
+    # Remove the previous cohort Files subdirectory
+    files_subdirectories.pop()
 
     # Copy files from class documents to cohort's class documents directory
     
