@@ -1,4 +1,4 @@
-import prompt, names, directories, cohort, message
+import prompt, names, directories, cohort, message, shutil, os
 from cohort import Cohort
 from operator import methodcaller
 
@@ -23,28 +23,42 @@ count = prompt.enter_cohort_count()
 
 # Loop to create cohort objects
 for i in range(count):
+    # Print out Cohort Number Banner divider
     message.info_banner(i)
+
+    # Get user cohort information
     num = prompt.enter_cohort_number()
     option = prompt.enter_cohort_days()
     start = prompt.enter_cohort_start_date()
     end = prompt.enter_cohort_end_date()
+    
     # Add cohort certificates name for Files' subdirectory
     files_subdirectories.append(names.certificates(num))
+    
     # Root of cohort folder
     # Change for every cohort number
     directory = names.cohort_directory_name(num, month, year, day_options[option])
+    
     # Create the parent cohort folder if it doesn't already exist
     directories.create_directory(directory)
+    
     # Create enrollment, agreement, syllabus, and roster files
     # based on user cohort number, month, and year input
     files = names.create_file_names(num, month, year, day_options[option])
+    
     # Debuggin for loop
     # Display all files created for cohort
     for file in files:
         print("File Created: " + file)
     # Create paths to sub directories
     directories.create_path(directory, subdirectories, files_subdirectories)
+
+    # Copy files from class documents to cohort's class documents directory
     
+    
+    # TODO: Go to Files directory in current cohort parents directory
+
+    # Create cohort class instances (objects)
     cohort = Cohort(i, num, month, year, option, start, end, directory, files)
     cohort_list.append(cohort)
 

@@ -19,8 +19,13 @@ def create_path(directory, subdirectories, files_subdirectories):
         
         os.makedirs(os.path.join(directory, subdirectory), exist_ok=True)
 
-        # Chesk if the current subdirectory we're creating is the Files subdirectory
+        # Check if the current subdirectory we're creating is the Files subdirectory
         # To create the Files subdirectory its own subdirectories
+
+        #                         Files Directory
+        #      ___________________________|_________________________
+        #      |           |          |       |          |         |
+        #  Agreement   Enrollment   Waiver   Certificates   Sign-ins
         if subdirectory == "Files":
             for files_subdirectory in files_subdirectories:
                 os.makedirs(os.path.join(directory + "/" + subdirectory, files_subdirectory), exist_ok=True)
