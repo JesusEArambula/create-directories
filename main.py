@@ -1,10 +1,10 @@
-import prompt, names, directories, cohort, message, shutil, os, dates, string
+import prompt, names, directories, cohort, message, shutil, os, dates, string, open_files
 from cohort import Cohort
 from datetime import date
 from operator import methodcaller
 
 # List of subdifectories to create for each cohort folder
-subdirectories = ["Class Documents", "Files", "Flyer", "Report", "Schedule", "Roster"]
+subdirectories = ["Files", "Class Documents", "Flyer", "Report", "Schedule", "Roster"]
 # The Files subdirectory contains its own list of subdirectories
 files_subdirectories = ["Attendance Agreement", "Enrollment Form", "Laptop Waiver", "Sign-in Sheets"]
 
@@ -39,6 +39,7 @@ for i in range(count):
 
     # Create a list of the cohorts dates
     date_list = dates.get_dates(start_date, end_date)
+    print(date_list)
     
     # Add cohort certificates name for Files' subdirectory
     files_subdirectories.append(names.certificates_directory(num))
@@ -62,27 +63,52 @@ for i in range(count):
     directories.create_path(directory, subdirectories, files_subdirectories)
     # Remove the previous cohort Files subdirectory
     files_subdirectories.pop()
-    os.chdir('class documents')
-    print(os.getcwd())
-    print(os.listdir())
-    # Copy files from class documents to cohort's class documents directory
-    documents_list = os.listdir()
-    for document in documents_list:
-        if document == 'roster.xlsx':
-            shutil.copyfile(document, f"../{directory}/Roster/{names.roster(num, month, year)}")
-        elif document == 'schedule.xlsx':
-            shutil.copyfile(document, f"../{directory}/Schedule/{names.schedule(num, month, year, day_options[option])}")
-        elif document == 'flyer.jpg':
-            shutil.copyfile(document, f"../{directory}/Flyer/{string.capwords(document)}")
-        elif document == 'report.docx':
-            shutil.copyfile(document, f"../{directory}/Report/{names.report(num, month, year)}")  
-        elif document == 'certificate.docx':
-            shutil.copyfile(document, f"../{directory}/Files/Cohort #{num} Certificates/{document}")
-        else:
-            shutil.copyfile(document, f"../{directory}/Class Documents/Cohort #{num} {string.capwords(document)}")
 
-    
-    # TODO: Go to Files directory in current cohort parents directory
+    # Change directory to /class document
+    # To loop through each file and copy it 
+    # to the cohort parents directory 
+    # and its subdirectories
+    os.chdir('class documents')
+
+    # Get the list of files
+    documents_list = os.listdir()
+    # Loop through each file
+    for document in documents_list:
+        # Copy the file to their respective locations based on its name
+        # and give the new copied file a new name
+        if document == 'roster.xlsx':
+            # Roster subdirectory
+            shutil.copyfile(document, f"../{directory}/{subdirectories[5]}/{names.roster(num, month, year)}")
+        elif document == 'schedule.xlsx':
+            # Schedule subdirectory
+            shutil.copyfile(document, f"../{directory}/{subdirectories[4]}/{names.schedule(num, month, year, day_options[option])}")
+        elif document == 'report.docx':
+            # Report subdirectory
+            shutil.copyfile(document, f"../{directory}/{subdirectories[3]}/{names.report(num, month, year)}")  
+        elif document == 'flyer.jpg':
+            # Flyer subdirectory
+            shutil.copyfile(document, f"../{directory}/{subdirectories[2]}/{string.capwords(document)}")
+        elif document == 'certificate.docx':
+            # Certificates subdirectory
+            shutil.copyfile(document, f"../{directory}/{subdirectories[1]}/{names.certificates_directory(num)}/{document}")
+        else:
+            # Any other file goes in the Class Documents subdirectory
+            shutil.copyfile(document, f"../{directory}/{subdirectories[0]}/Cohort #{num} {string.capwords(document)}")
+
+    # Return to "create-directories" folder
+    os.chdir(f"../{directory}/{subdirectories[0]}")
+    # Get the list of files in the parent directory
+    # (although there are only subdirectories here)
+    documents_list = os.listdir()
+
+    for document in documents_list:
+        open_files.replace_text(document, document, {"{Day1}": f"{day_options[option].split()[0]}", "{Day2}": f"{day_options[option].split()[1]}"})
+
+
+
+    # Change directory to paren directory's /Class Documents
+    # Loop through each document and open it to change weekdays, dates, month, and year
+
 
     # Create cohort class instances (objects)
     cohort = Cohort(i, num, month, year, option, start, end, directory, files)

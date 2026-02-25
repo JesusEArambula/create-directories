@@ -1,4 +1,4 @@
-from datetime import date, timedelta
+from datetime import timedelta
 
 def get_dates(start_date, end_date):
     """
@@ -19,8 +19,3 @@ def get_dates(start_date, end_date):
 
     return dates
 
-# Usage
-start = date(2026, 3, 24)
-end = date(2026, 4, 16)
-dates = get_dates(start, end)
-print(dates)
