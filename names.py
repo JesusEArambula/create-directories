@@ -1,6 +1,6 @@
 # Split days
 def split_days(option):
-    return f"{option.split()[0]}/{option.split()[1]}"
+    return f"{option.split()[0]}, {option.split()[1]}"
 
 # Cohort number certificate directory name
 def certificates(num):
@@ -8,7 +8,7 @@ def certificates(num):
 
 # Cohort directory name
 def cohort_directory_name(number, month, year, days):
-    return f"(#{number} SPANISH) {days.split()[0]}, {days.split()[1]} {month} {year} Workshop 360 Valencia"
+    return f"(#{number} SPANISH) {split_days(days)} {month} {year} Workshop 360 Valencia"
 
 # Enrollment form name
 def enrollment(number, month, year, days):
@@ -24,11 +24,11 @@ def syllabus(number, days):
 
 # Roster file name
 def roster(number, month, year):
-    return f"{month} {year} Cohort #{number} (SPANISH) 360 Valencia St Roster"
+    return f"(#{number} Spanish) {month} {year} Cohort 360 Valencia St Roster"
 
 # Schedule file name
-def schedule(number, month, year):
-    return f"{month} {year} Cohort #{number} (SPANISH) 360 Valencia St Roster"
+def schedule(number, month, year, days):
+    return f"Dev_Mission Digital Literacy Schedule - {month} {year} #{number} ({split_days(days)}) (360 Valencia St Roster)"
 
 # File names based of cohort number, month, and year
 def create_file_names(number, month, year, days):

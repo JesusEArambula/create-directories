@@ -56,7 +56,17 @@ for i in range(count):
     files_subdirectories.pop()
 
     # Copy files from class documents to cohort's class documents directory
-    
+    documents_list = os.listdir()
+    for document in documents_list:
+        if document == 'roster.xlsx':
+            shutil.copyfile(document, f"../(#20 SPANISH) Mon, Wed March 2026 Workshop 360 Valencia/Roster/Cohort #20 {document.title()}")
+        if document == 'schedule.xlsx':
+            shutil.copyfile(document, f"../(#20 SPANISH) Mon, Wed March 2026 Workshop 360 Valencia/Schedule/Cohort #20 {document.title()}")
+        if document == 'certificate.docx':
+            shutil.copyfile(document, f"../(#20 SPANISH) Mon, Wed March 2026 Workshop 360 Valencia/Files/Cohort #20 Certificates/Cohort #20 {document.title()}")
+        else:
+            shutil.copyfile(document, f"../(#20 SPANISH) Mon, Wed March 2026 Workshop 360 Valencia/Class Documents/Cohort #20 {document.title()}")
+
     
     # TODO: Go to Files directory in current cohort parents directory
 
