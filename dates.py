@@ -20,6 +20,7 @@ def get_dates(start_date, end_date):
     return dates
 
 # Usage
-start = date(2026, 3, 2)
-end = date(2026, 3, 25)
-get_dates(start, end)
+start = date(2026, 3, 24)
+end = date(2026, 4, 16)
+dates = get_dates(start, end)
+print(dates)
