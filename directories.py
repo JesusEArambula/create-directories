@@ -3,7 +3,7 @@ import os, message
 # Function to create directories
 def create_directory(directory):
     os.makedirs(directory, exist_ok = True)
-    # print(f"Folder << {directory} >> created successfully.")
+    print(f"Folder << {directory} >> created successfully.")
 
 # Function to create paths to subfolder
 def create_path(directory, subdirectories, files_subdirectories):
@@ -29,8 +29,8 @@ def create_path(directory, subdirectories, files_subdirectories):
         if subdirectory == "Files":
             for files_subdirectory in files_subdirectories:
                 os.makedirs(os.path.join(directory + "/" + subdirectory, files_subdirectory), exist_ok=True)
-                # print(f"Folder << {subdirectory}/{files_subdirectory} >> inside Files directory created successfully.")
-        # print(f"Folder << {directory}/{subdirectory} >> created successfully.")
+                print(f"Folder << {subdirectory}/{files_subdirectory} >> inside Files directory created successfully.")
+        print(f"Folder << {directory}/{subdirectory} >> created successfully.")
     print("> Subdirectories Created Successfully!")
 
 

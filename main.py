@@ -13,6 +13,22 @@ files_subdirectories = ["Attendance Agreement", "Enrollment Form", "Laptop Waive
 # 2) Tuesday/Thursday
 day_options = {1: "Mon Wed", 2: "Tue Thu"}
 
+# Created dictionary of Months in Spanish
+mes = {
+    "January": "Enero",
+    "February": "Febrero",
+    "March": "Marzo",
+    "April": "Abril",
+    "May": "Mayo",
+    "June": "Junio",
+    "July": "Julio",
+    "August": "Agosto",
+    "September": "Septiembre",
+    "October": "Octubre",
+    "November": "Noviembre",
+    "December": "Diciembre",
+}
+
 # List to store cohorts' information
 cohort_list = []
 
@@ -76,9 +92,13 @@ for i in range(count):
     for document in documents_list:
         # Copy the file to their respective locations based on its name
         # and give the new copied file a new name
+        if document == ".Ds_Store":
+            pass
+        print(f"> Document '{document}' has been created!")
         if document == 'roster.xlsx':
             # Roster subdirectory
             shutil.copyfile(document, f"../{directory}/{subdirectories[5]}/{names.roster(num, month, year)}")
+            
         elif document == 'schedule.xlsx':
             # Schedule subdirectory
             shutil.copyfile(document, f"../{directory}/{subdirectories[4]}/{names.schedule(num, month, year, day_options[option])}")
@@ -114,22 +134,25 @@ for i in range(count):
 
     # Dictionary for replacement values
     replacements = {
-        "{Day1}": workshop_days_spanish[0],
-        "{Day2}": workshop_days_spanish[1],
-        "{Season}": cohort_season,
-        "{Date1}": dates_list[0],
-        "{Date2}": dates_list[1],
-        "{Date3}": dates_list[2],
-        "{Date4}": dates_list[3],
-        "{Date5}": dates_list[4],
-        "{Date6}": dates_list[5],
-        "{Date7}": dates_list[6],
-        "{Date8}": dates_list[7],
-        "{Month}": month,
-        "{Year}": year,        
-        "{Start}": start,
-        "{End}": end,
-        "{Num}": num
+        "Day1": workshop_days_english[0],
+        "Day2": workshop_days_english[1],
+        "Dia1": workshop_days_spanish[0],
+        "Dia2": workshop_days_spanish[1],
+        "Mes": mes[month.title()],
+        "Season": cohort_season,
+        "Date1": dates_list[0],
+        "Date2": dates_list[1],
+        "Date3": dates_list[2],
+        "Date4": dates_list[3],
+        "Date5": dates_list[4],
+        "Date6": dates_list[5],
+        "Date7": dates_list[6],
+        "Date8": dates_list[7],
+        "Month": month,
+        "Year": year,        
+        "Start": start,
+        "End": end,
+        "Number": num
         }
 
     # Return to /create-directories folder 
@@ -172,5 +195,3 @@ for i in range(count):
     # Return to "create-directories" folder
     os.chdir("../../../")
 
-results = list(map(methodcaller('get_directory'), cohort_list))
-print(results)
