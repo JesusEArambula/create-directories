@@ -97,12 +97,26 @@ for i in range(count):
 
     # Change between Mon/Wed and Tue/Thu
     if option == 1:
-        workshop_days = ["Lunes", "Miercoles"]
+        workshop_days_spanish = ["Lunes", "Miercoles"]
+        workshop_days_english = ["Mon", "Wed"]
     else:
-        workshop_days = ["Martes", "Jueves"]
+        workshop_days_spanish = ["Martes", "Jueves"]
+        workshop_days_english = ["Tue", "Thu"]
 
-    # Dictionary for dates replacement values
-    dates_replacement = {
+    
+    # Determine season of the cohort
+    if start_date >= date(int(year), 1, 1) and start_date <= date(int(year), 4, 30):
+        cohort_season = "Spring"
+    if start_date >= date(int(year), 5, 1) and start_date <= date(int(year), 8, 31):
+        cohort_season = "Summer"
+    if start_date >= date(int(year), 9, 1) and start_date <= date(int(year), 12, 31):
+        cohort_season = "Fall"
+
+    # Dictionary for replacement values
+    replacements = {
+        "{Day1}": workshop_days_spanish[0],
+        "{Day2}": workshop_days_spanish[1],
+        "{Season}": cohort_season,
         "{Date1}": dates_list[0],
         "{Date2}": dates_list[1],
         "{Date3}": dates_list[2],
@@ -111,29 +125,52 @@ for i in range(count):
         "{Date6}": dates_list[5],
         "{Date7}": dates_list[6],
         "{Date8}": dates_list[7],
+        "{Month}": month,
+        "{Year}": year,        
+        "{Start}": start,
+        "{End}": end,
+        "{Num}": num
         }
 
-    # Return to "create-directories" folder
+    # Return to /create-directories folder 
+    # and move to /Class Documents subdirectory
+    # Loop through each file in the subdirectory
+    # and replace all the needed text in the docx files
     os.chdir(f"../{directory}/{subdirectories[0]}")
-    # Get the list of files in the parent directory
-    # (although there are only subdirectories here)
     documents_list = os.listdir()
-
     for document in documents_list:
-        open_files.replace_text(document, document, {"{Day1}": workshop_days[0], "{Day2}": workshop_days[1]}, dates_replacement)
+        open_files.replace_text_in_docx(document, document, replacements)
+    
+    # Move to the /Report subdirectory
+    # and replace all needed text in the "Schedule" xlsx file
+    os.chdir(f"../{subdirectories[3]}")
+    documents_list = os.listdir()
+    for document in documents_list:
+        open_files.replace_text_in_docx(document, document, replacements)
 
+    # Move to the /Roster subdirectory
+    # and replace all needed text in the "Schedule" xlsx file
+    os.chdir(f"../{subdirectories[5]}")
+    documents_list = os.listdir()
+    for document in documents_list:
+        open_files.replace_text_in_excel(document, document, replacements)
+    
+    # Move to the /Schedule subdirectory
+    # and replace all needed text in the "Schedule" xlsx file
+    os.chdir(f"../{subdirectories[4]}")
+    documents_list = os.listdir()
+    for document in documents_list:
+        open_files.replace_text_in_excel(document, document, replacements)
 
-
-    # Change directory to paren directory's /Class Documents
-    # Loop through each document and open it to change weekdays, dates, month, and year
-
-
-    # Create cohort class instances (objects)
-    cohort = Cohort(i, num, month, year, option, start, end, directory, files)
-    cohort_list.append(cohort)
+    # Move to the /Files/Cohort # Certificates subdirectory
+    # and replace all needed text in the "Schedule" xlsx file
+    os.chdir(f"../{subdirectories[1]}/Cohort #{num} Certificates")
+    documents_list = os.listdir()
+    for document in documents_list:
+        open_files.replace_text_in_docx(document, document, replacements)
 
     # Return to "create-directories" folder
-    os.chdir("../../")
+    os.chdir("../../../")
 
 results = list(map(methodcaller('get_directory'), cohort_list))
 print(results)
