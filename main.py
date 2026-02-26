@@ -4,7 +4,7 @@ from datetime import date
 from operator import methodcaller
 
 # List of subdifectories to create for each cohort folder
-subdirectories = ["Files", "Class Documents", "Flyer", "Report", "Schedule", "Roster"]
+subdirectories = ["Class Documents", "Files", "Flyer", "Report", "Schedule", "Roster"]
 # The Files subdirectory contains its own list of subdirectories
 files_subdirectories = ["Attendance Agreement", "Enrollment Form", "Laptop Waiver", "Sign-in Sheets"]
 
@@ -38,8 +38,8 @@ for i in range(count):
     end_date = date(int(year), int(end.split('/')[0]), int(end.split('/')[1]))
 
     # Create a list of the cohorts dates
-    date_list = dates.get_dates(start_date, end_date)
-    print(date_list)
+    dates_list = dates.get_dates(start_date, end_date)
+    print(dates_list)
     
     # Add cohort certificates name for Files' subdirectory
     files_subdirectories.append(names.certificates_directory(num))
@@ -95,6 +95,24 @@ for i in range(count):
             # Any other file goes in the Class Documents subdirectory
             shutil.copyfile(document, f"../{directory}/{subdirectories[0]}/Cohort #{num} {string.capwords(document)}")
 
+    # Change between Mon/Wed and Tue/Thu
+    if option == 1:
+        workshop_days = ["Lunes", "Miercoles"]
+    else:
+        workshop_days = ["Martes", "Jueves"]
+
+    # Dictionary for dates replacement values
+    dates_replacement = {
+        "{Date1}": dates_list[0],
+        "{Date2}": dates_list[1],
+        "{Date3}": dates_list[2],
+        "{Date4}": dates_list[3],
+        "{Date5}": dates_list[4],
+        "{Date6}": dates_list[5],
+        "{Date7}": dates_list[6],
+        "{Date8}": dates_list[7],
+        }
+
     # Return to "create-directories" folder
     os.chdir(f"../{directory}/{subdirectories[0]}")
     # Get the list of files in the parent directory
@@ -102,7 +120,7 @@ for i in range(count):
     documents_list = os.listdir()
 
     for document in documents_list:
-        open_files.replace_text(document, document, {"{Day1}": f"{day_options[option].split()[0]}", "{Day2}": f"{day_options[option].split()[1]}"})
+        open_files.replace_text(document, document, {"{Day1}": workshop_days[0], "{Day2}": workshop_days[1]}, dates_replacement)
 
 
 
@@ -115,7 +133,7 @@ for i in range(count):
     cohort_list.append(cohort)
 
     # Return to "create-directories" folder
-    os.chdir("../")
+    os.chdir("../../")
 
 results = list(map(methodcaller('get_directory'), cohort_list))
 print(results)
