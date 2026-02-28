@@ -6,22 +6,25 @@ def replace_text_in_docx(filename, output_filename, replacements):
 
     # Loop throuh each paragraph in the docx file
     for p in doc.paragraphs:
-        for key in replacements:
-        # If the key appears in the text, replace it with the value
-            if key in p.text:
-                # Replacing text at the paragraph level often loses formatting
-                p.text = p.text.replace(key, replacements[key])
-                print(f"Replaced '{key}' with '{replacements[key]}'")
+        for run in p.runs:
+            for key in replacements:
+            # If the key appears in the text, replace it with the value
+                if key in run.text:
+                    print(f"Replacing '{run.text}' ...")
+                    # Replacing text at the paragraph level often loses formatting
+                    run.text = run.text.replace(key, replacements[key])
+                    print(f"Replaced '{key}' with '{replacements[key]}'")
     
     # You also need to check tables, headers, and footers separately
     for table in doc.tables:
         for row in table.rows:
             for cell in row.cells:
                 for p in cell.paragraphs:
-                    for key in replacements:
-                        if key in p.text:
-                            p.text = p.text.replace(key, replacements[key])
-                            print(f"Replaced '{key}' with '{replacements[key]}'")
+                    for run in p.runs:
+                        for key in replacements:
+                            if key in run.text:
+                                run.text = run.text.replace(key, replacements[key])
+                                print(f"Replaced '{key}' with '{replacements[key]}'")
 
     doc.save(output_filename)
     print(f"Document saved as {output_filename} using python-docx-replace.")
