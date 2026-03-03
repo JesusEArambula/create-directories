@@ -1,5 +1,4 @@
-import prompt, names, directories, cohort, message, shutil, os, dates, string, open_files
-from cohort import Cohort
+import prompt, names, directories, message, shutil, os, dates, string, open_files
 from datetime import date
 from operator import methodcaller
 

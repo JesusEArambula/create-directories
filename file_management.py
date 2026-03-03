@@ -1,5 +1,4 @@
-import os, shutil, cohort
-from cohort import Cohort
+import os, shutil
 
 # print(os.getcwd())
 # os.chdir(os.getcwd() + '/class documents')
