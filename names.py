@@ -1,30 +1,47 @@
+# Split days
+def split_days(option):
+    return f"{option.split()[0]}, {option.split()[1]}"
+
+# Cohort number certificate directory name
+def certificates_directory(num):
+    return f"Cohort #{num} Certificates"
+
+# Cohort directory name
+def cohort_directory_name(number, month, year, days):
+    return f"(#{number} SPANISH) {split_days(days)} {month} {year} Workshop 360 Valencia"
+
 # Enrollment form name
-def enrollment(number, month, year):
-    return f"Cohort #{number} MonWed - Spanish Digital Literacy Enrollment Form {month} {year}"
+def enrollment(number, month, year, days):
+    return f"Cohort #{number} {split_days(days)} - Spanish Digital Literacy Enrollment Form {month} {year}.docx"
+
 # Agreement form name
-def agreement(number):
-    return f"Cohort #{number} - Spanish Basic Digital Literacy Agreement MonWed"
+def agreement(number, days):
+    return f"Cohort #{number} - Spanish Basic Digital Literacy Agreement {split_days(days)}.docx"
+
 # Syllabus file name
-def syllabus(number):
-    return f"Cohort #{number} MonWed - Syllabus"
+def syllabus(number, days):
+    return f"Cohort #{number} {split_days(days)} - Syllabus"
+
 # Roster file name
 def roster(number, month, year):
-    return f"{month} {year} Cohort #{number} (SPANISH) 360 Valencia St Roster"
+    return f"(#{number} Spanish) {month} {year} Cohort 360 Valencia St Roster.xlsx"
 
-def create_file_names(number, month, year):
+# Schedule file name
+def schedule(number, month, year, days):
+    return f"Dev_Mission Digital Literacy Schedule - {month} {year} #{number} ({split_days(days)}) (360 Valencia St Roster).xlsx"
+
+# Report file name
+def report(number, month, year):
+    return f"Report Cohort #{number} - SBDL Summary Report {month} {year} (Cohort #{number}).docx"
+
+# File names based of cohort number, month, and year
+def create_file_names(number, month, year, days):
     return [
-            enrollment(number, month, year), 
-            agreement(number), 
-            syllabus(number), 
-            roster(number, month, year)
+            enrollment(number, month, year, days), 
+            agreement(number, days), 
+            syllabus(number, days), 
+            roster(number, month, year),
+            schedule(number, month, year, days)
             ]
 
-# Forms Names
-# enrollment_form_1 = f"Cohort #{cohort_number_1} MonWed - Spanish Digital Literacy Enrollment Form {cohort_month} {cohort_year}"
-# enrollment_form_2 = f"Cohort #{cohort_number_2} TueThu - Spanish Digital Literacy Enrollment Form {cohort_month} {cohort_year}"
-# agreement_form_1 = f"Cohort #{cohort_number_1} - Spanish Basic Digital Literacy Agreement MonWed"
-# agreement_form_2 = f"Cohort #{cohort_number_2} - Spanish Basic Digital Literacy Agreement TueThu"
-# syllabus_1 = f"Cohort #{cohort_number_1} MonWed - Syllabus"
-# syllabus_2 = f"Cohort #{cohort_number_2} TueThu - Syllabus"
-# roster_1 = f"{cohort_month} {cohort_year} Cohort #{cohort_number_1} (SPANISH) 360 Valencia St Roster"
-# roster_2 = f"{cohort_month} {cohort_year} Cohort #{cohort_number_2} (SPANISH) 360 Valencia St Roster"
+
