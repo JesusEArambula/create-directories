@@ -6,6 +6,14 @@ root = tk.Tk()
 # 2. Set the window title (optional)
 root.title("My First Application")
 
+# Background color
+root.configure(bg="lightblue")
+# Window Icon
+# PNG and GIF are reliably supported across platforms
+icon_image = tk.PhotoImage(file='res/folder-icon.png')
+root.iconphoto(True, icon_image)
+
+
 # 3. Set the initial size of the window (optional, format as 'WidthxHeight')
 root.geometry('350x200')
 
