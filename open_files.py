@@ -1,8 +1,8 @@
-import docx, openpyxl
+import document, openpyxl
 
 def replace_text_in_docx(filename, output_filename, replacements):
     # Open docx file
-    doc = docx.Document(filename)
+    doc = document.Document(filename)
 
     # Loop throuh each paragraph in the docx file
     for p in doc.paragraphs:
