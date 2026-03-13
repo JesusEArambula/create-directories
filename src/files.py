@@ -1,20 +1,41 @@
 
+files_dict = {}
+
 
 files_list = []
 files_types = []
 index = 0
 
+user_input = str(input(">> Enter name for root folder: "))
+
+while user_input == "":
+    print(">> ERROR: Root folder cannot be blank!")
+    user_input = str(input(">> Enter name for root folder: "))
+
+files_dict[user_input] = []
+
 while True:
+    print("=== Create a file ===\n1) Folder\n2) Document")
     # Take user input for the file name
-    user_input = str(input(">> Enter file name: "))
+    user_input = str(input(">> What would you like to create? (1/2)"))
     # Exit loop when user enteres "exit"
     if user_input == "exit":
         break
     # Check if the user is being a goofball
     if user_input == "":
-        print(">> You have to enter a name! >:c")
+        print(">> ERROR: That is not an option!")
         continue
-    else:
+    # Create a folder and ask for name
+    if user_input == "1":
+        user_input = input(">> Enter folder name: ")
+        files_dict[user_input] = []
+        print(files_dict)
+    if user_input == "2":
+        print("=== File Types Available ===\n1) Microsoft Word (docx)\n2) Excel Sheet (xlsx)\n3) Powerpoint (pptx)")
+        user_input = str(input(">> Enter document option (1, 2, 3): "))
+    
+    
+    else:  
         # Add the user input to the list of files
         files_list.append(user_input)
         # Take user input for file type

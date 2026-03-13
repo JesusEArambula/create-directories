@@ -1,38 +1,43 @@
-import document, openpyxl
+import openpyxl
+from docx import Document
 
-def replace_text_in_docx(filename, output_filename, replacements):
+def replace_text_in_docx(filename, replacements):
     # Open docx file
-    doc = document.Document(filename)
+    print(filename)
+    try:
+        doc = Document(filename)
 
-    # Loop throuh each paragraph in the docx file
-    for p in doc.paragraphs:
-        for run in p.runs:
-            for key in replacements:
-            # If the key appears in the text, replace it with the value
-                if key in run.text:
-                    print(f"Replacing '{run.text}' ...")
-                    # Replacing text at the paragraph level often loses formatting
-                    run.text = run.text.replace(key, replacements[key])
-                    print(f"Replaced '{key}' with '{replacements[key]}'")
-    
-    # You also need to check tables, headers, and footers separately
-    for table in doc.tables:
-        for row in table.rows:
-            for cell in row.cells:
-                for p in cell.paragraphs:
-                    for run in p.runs:
-                        for key in replacements:
-                            if key in run.text:
-                                run.text = run.text.replace(key, replacements[key])
-                                print(f"Replaced '{key}' with '{replacements[key]}'")
+        # Loop throuh each paragraph in the docx file
+        for p in doc.paragraphs:
+            for run in p.runs:
+                for key in replacements:
+                # If the key appears in the text, replace it with the value
+                    if key in run.text:
+                        print(f"Replacing '{run.text}' ...")
+                        # Replacing text at the paragraph level often loses formatting
+                        run.text = run.text.replace(key, replacements[key])
+                        print(f"Replaced '{key}' with '{replacements[key]}'")
+        
+        # You also need to check tables, headers, and footers separately
+        for table in doc.tables:
+            for row in table.rows:
+                for cell in row.cells:
+                    for p in cell.paragraphs:
+                        for run in p.runs:
+                            for key in replacements:
+                                if key in run.text:
+                                    run.text = run.text.replace(key, replacements[key])
+                                    print(f"Replaced '{key}' with '{replacements[key]}'")
 
-    doc.save(output_filename)
-    print(f"Document saved as {output_filename} using python-docx-replace.")
+        doc.save(filename)
+        print(f"Document saved as {filename} using python-docx-replace.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
 
 
 # Replace words in xlsx files
-def replace_text_in_excel(source_file, target_file, replacements):
+def replace_text_in_excel(source_file, replacements):
     """
     Opens an Excel file, finds and replaces text, and saves it to a new file.
     
@@ -66,7 +71,7 @@ def replace_text_in_excel(source_file, target_file, replacements):
                             print(sheet.title)
 
     # Save the modified file
-    wb.save(target_file)
-    print(f"\nReplacement complete. File saved as {target_file}")
+    wb.save(source_file)
+    print(f"\nReplacement complete. File saved as {source_file}")
 
 

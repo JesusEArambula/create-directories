@@ -161,35 +161,35 @@ for i in range(count):
     os.chdir(f"../{directory}/{subdirectories[0]}")
     documents_list = os.listdir()
     for document in documents_list:
-        open_files.replace_text_in_docx(document, document, replacements)
+        open_files.replace_text_in_docx(document, replacements)
     
     # Move to the /Report subdirectory
     # and replace all needed text in the "Schedule" xlsx file
     os.chdir(f"../{subdirectories[3]}")
     documents_list = os.listdir()
     for document in documents_list:
-        open_files.replace_text_in_docx(document, document, replacements)
+        open_files.replace_text_in_docx(document, replacements)
 
     # Move to the /Roster subdirectory
     # and replace all needed text in the "Schedule" xlsx file
     os.chdir(f"../{subdirectories[5]}")
     documents_list = os.listdir()
     for document in documents_list:
-        open_files.replace_text_in_excel(document, document, replacements)
+        open_files.replace_text_in_excel(document, replacements)
     
     # Move to the /Schedule subdirectory
     # and replace all needed text in the "Schedule" xlsx file
     os.chdir(f"../{subdirectories[4]}")
     documents_list = os.listdir()
     for document in documents_list:
-        open_files.replace_text_in_excel(document, document, replacements)
+        open_files.replace_text_in_excel(document, replacements)
 
     # Move to the /Files/Cohort # Certificates subdirectory
     # and replace all needed text in the "Schedule" xlsx file
     os.chdir(f"../{subdirectories[1]}/Cohort #{num} Certificates")
     documents_list = os.listdir()
     for document in documents_list:
-        open_files.replace_text_in_docx(document, document, replacements)
+        open_files.replace_text_in_docx(document, replacements)
 
     # Return to "create-directories" folder
     os.chdir("../../../")
