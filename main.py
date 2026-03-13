@@ -1,6 +1,5 @@
 import prompt, names, directories, message, shutil, os, dates, string, open_files
 from datetime import date
-from operator import methodcaller
 
 # List of subdifectories to create for each cohort folder
 subdirectories = ["Class Documents", "Files", "Flyer", "Report", "Schedule", "Roster"]
@@ -43,7 +42,7 @@ for i in range(count):
     message.info_banner(i)
 
     # Get user cohort information
-    num = prompt.enter_cohort_number()
+    cohort_num = prompt.enter_cohort_number()
     option = prompt.enter_cohort_days()
     start = prompt.enter_cohort_start_date()
     end = prompt.enter_cohort_end_date()
@@ -57,18 +56,18 @@ for i in range(count):
     print(dates_list)
     
     # Add cohort certificates name for Files' subdirectory
-    files_subdirectories.append(names.certificates_directory(num))
+    files_subdirectories.append(names.certificates_directory(cohort_num))
     
     # Root of cohort folder
     # Change for every cohort number
-    directory = names.cohort_directory_name(num, month, year, day_options[option])
+    directory = names.cohort_directory_name(cohort_num, month, year, day_options[option])
     
     # Create the parent cohort folder if it doesn't already exist
     directories.create_directory(directory)
     
     # Create enrollment, agreement, syllabus, and roster files
     # based on user cohort number, month, and year input
-    files = names.create_file_names(num, month, year, day_options[option])
+    files = names.create_file_names(cohort_num, month, year, day_options[option])
     
     # Debuggin for loop
     # Display all files created for cohort
@@ -96,27 +95,27 @@ for i in range(count):
         print(f"> Document '{document}' has been created!")
         if document == 'roster.xlsx':
             # Roster subdirectory
-            shutil.copyfile(document, f"../{directory}/{subdirectories[5]}/{names.roster(num, month, year)}")
+            shutil.copyfile(document, f"../{directory}/{subdirectories[5]}/{names.roster(cohort_num, month, year)}")
             
         elif document == 'schedule.xlsx':
             # Schedule subdirectory
-            shutil.copyfile(document, f"../{directory}/{subdirectories[4]}/{names.schedule(num, month, year, day_options[option])}")
+            shutil.copyfile(document, f"../{directory}/{subdirectories[4]}/{names.schedule(cohort_num, month, year, day_options[option])}")
         elif document == 'report.docx':
             # Report subdirectory
-            shutil.copyfile(document, f"../{directory}/{subdirectories[3]}/{names.report(num, month, year)}")  
+            shutil.copyfile(document, f"../{directory}/{subdirectories[3]}/{names.report(cohort_num, month, year)}")  
         elif document == 'flyer.jpg':
             # Flyer subdirectory
             shutil.copyfile(document, f"../{directory}/{subdirectories[2]}/{string.capwords(document)}")
         elif document == 'certificate.docx':
             # Certificates subdirectory
-            shutil.copyfile(document, f"../{directory}/{subdirectories[1]}/{names.certificates_directory(num)}/{document}")
+            shutil.copyfile(document, f"../{directory}/{subdirectories[1]}/{names.certificates_directory(cohort_num)}/{document}")
         else:
             # Any other file goes in the Class Documents subdirectory
-            shutil.copyfile(document, f"../{directory}/{subdirectories[0]}/Cohort #{num} {string.capwords(document)}")
+            shutil.copyfile(document, f"../{directory}/{subdirectories[0]}/Cohort #{cohort_num} {string.capwords(document)}")
 
     # Change between Mon/Wed and Tue/Thu
     if option == 1:
-        workshop_days_spanish = ["Lunes", "Miercoles"]
+        workshop_days_spanish = ["Lunes", "Miércoles"]
         workshop_days_english = ["Mon", "Wed"]
     else:
         workshop_days_spanish = ["Martes", "Jueves"]
@@ -151,7 +150,7 @@ for i in range(count):
         "Year": year,        
         "Start": start,
         "End": end,
-        "Number": num
+        "Cohort Number": cohort_num
         }
 
     # Return to /create-directories folder 
@@ -186,7 +185,7 @@ for i in range(count):
 
     # Move to the /Files/Cohort # Certificates subdirectory
     # and replace all needed text in the "Schedule" xlsx file
-    os.chdir(f"../{subdirectories[1]}/Cohort #{num} Certificates")
+    os.chdir(f"../{subdirectories[1]}/Cohort #{cohort_num} Certificates")
     documents_list = os.listdir()
     for document in documents_list:
         open_files.replace_text_in_docx(document, replacements)
