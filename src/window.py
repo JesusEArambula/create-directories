@@ -10,7 +10,7 @@ root.title("My First Application")
 root.configure(bg="lightblue")
 # Window Icon
 # PNG and GIF are reliably supported across platforms
-icon_image = tk.PhotoImage(file='../res/folder-icon.png')
+icon_image = tk.PhotoImage(file='res/folder-icon.png')
 root.iconphoto(True, icon_image)
 
 
