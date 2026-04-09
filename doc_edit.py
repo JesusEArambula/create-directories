@@ -1,4 +1,4 @@
-from docx import Document
+from object import Document
 
 # Open docx file
 doc = Document("class documents/enrollment.docx")
